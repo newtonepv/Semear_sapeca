@@ -75,7 +75,14 @@ def main():
             print("Erro ao capturar imagem.")
             break
         
-        blurred_frame = cv.GaussianBlur(frame, (5, 5), 0)
+        # Normalização do histograma para reduzir o impacto da iluminação
+        lab = cv.cvtColor(frame, cv.COLOR_BGR2LAB)
+        l, a, b = cv.split(lab)
+        l = cv.equalizeHist(l)
+        lab = cv.merge((l, a, b))
+        frame = cv.cvtColor(lab, cv.COLOR_LAB2BGR)
+
+        blurred_frame = cv.GaussianBlur(frame, (9, 9), 0)
         hsv = cv.cvtColor(blurred_frame, cv.COLOR_BGR2HSV)
         
         combined_result = np.zeros_like(frame)
@@ -83,7 +90,6 @@ def main():
         for color_name, color in colors.items():
             result = process_color(color_name, color, hsv, frame)
             combined_result = cv.add(combined_result, result)
-        
         cv.imshow('Combined Result', combined_result)
         cv.imshow('Original Frame', frame)
 
