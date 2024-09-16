@@ -14,7 +14,8 @@ while True:
     if(suc):
         
         cv2.imshow('Camaera',img)
-    
+        
+
     if(cv2.waitKey(1)&0xFF==ord('q')):
         break
 
