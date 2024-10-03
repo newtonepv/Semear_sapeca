@@ -1,6 +1,10 @@
 import smbus
 import time
 
+'''
+Código que faz a inteegração entre a leitura do acelerometro e do giroscopio, faz o que cada código separado faz, inclusive da mesma forma.
+'''
+
 # Endereço I2C do MPU-9250 (com MPU-6500 embutido)
 MPU9250_ADDRESS = 0x68
 
