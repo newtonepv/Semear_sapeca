@@ -108,8 +108,7 @@ async def loop_detector():
         # Pressione 'q' para sair
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
-
+        await asyncio.sleep(0.01)
     # Finaliza o processo e libera os recursos
     process.terminate()
     cv2.destroyAllWindows()
-asyncio.run(loop_detector())
