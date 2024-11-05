@@ -2,6 +2,7 @@
 
 import time
 import asyncio
+import mpu9250.acelerometro
 import loop_detectar_rotinas
 import loop_balancear
 from pid.pid import Pid
@@ -13,7 +14,7 @@ async def main():
     pid_velocidade = Pid(3,1,0)
 
     pid_balancear_task=asyncio.create_task(loop_balancear.pid_loop(pid_angulo,pid_velocidade))
-    detectar_task=asyncio.create_task(loop_detectar_rotinas.rodar_loop())
+    detectar_task=asyncio.create_task(loop_detectar_rotinas.loop_detector())
 
     await asyncio.gather(pid_balancear_task, detectar_task)
 
